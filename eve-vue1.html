@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>EVE</title>
+        <script src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
+        <script src="D:\Work\JS\EVE\JS Service\eve-vue\vue.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="eve-vue.css">
+        <script src="settings.js"></script>
+        <script src="objects/Asset.js"></script>
+        <script src="components/PageT2IventMultispectrumShieldHardenerII.js"></script>
+        <script src="components/PagePricePlex.js"></script>
+        <script src="components/PageRight.js"></script>
+        <script src="components/PageEmpty.js"></script>
+        <script src="components/PageGoldenMykoserocin.js"></script>
+        <script src="components/PageMalachiteMykoserocin.js"></script>
+        <script src="components/PageAzureMykoserocin.js"></script>
+        <script src="components/PageCeladonMykoserocin.js"></script>
+        <script src="components/PageLowgradeRaptureAlpha.js"></script>
+        <script src="components/PageLowgradeRaptureDelta.js"></script>
+        <script src="components/PageLowgradeRaptureGamma.js"></script>
+        <script src="components/PageMidgradeNirvanaBeta.js"></script>
+        <script src="components/PageMidgradeNirvanaGamma.js"></script>
+        <script src="components/PageMidgradeRaptureBeta.js"></script>
+        <script src="components/PageMidgradeRaptureGamma.js"></script>
+        <script src="components/PageMobileDepot.js"></script>
+        <script src="components/PageLPStateProtectorate.js"></script>
+        <script src="components/PageLPFederalDefenceUnion.js"></script>
+        <script src="components/PageLP24ImperialCrusade.js"></script>
+        <script src="components/PageLPTribalLiberationForce.js"></script>
+        <script src="components/PageLPGurista.js"></script>
+        <script src="components/PageLPCapBooster.js"></script>
+        <script src="components/PageLPSistersOfEVE.js"></script>
+        <script src="components/PageBuyMineralsTradeHub.js"></script>
+        <script src="components/PagePriceJitaVSNennamaila.js"></script>
+        <script src="components/PagePriceJitaVSTurnur.js"></script>
+        <script src="components/PageGasProductions.js"></script>
+        <script src="components/PageMobileTractorUnit.js"></script>
+        <script src="components/PageComponents4Ship.js"></script>
+        <script src="components/PageT2Shield.js"></script>
+        <script src="components/PageT2Triglav.js"></script>
+        <script src="components/PageT2Rig.js"></script>
+        <script src="components/PageFractionShip.js"></script>
+        <script src="components/PageRigs.js"></script>
+        <script src="components/PageTest.js"></script>
+        <script src="util/Production.js"></script>
+        <script src="util/EVEService.js"></script>
+        <script src="util/FormatUtils.js"></script>
+    </head>
+    <body>
+        <style>
+            li,div,body {
+                background-color: #76b5c5;
+            }
+
+            div, body {
+                color: #000000;
+            }
+        </style>
+        
+        <div id="app" v-bind:style="styleApp">
+            <div id="leftPage" v-bind:style="styleLeftPage">
+                <el-row class="tac">
+                    <el-col :span="12">
+                      <el-menu
+                        default-active="2"
+                        class="el-menu-vertical-demo"
+                        @select="handleSelect">
+                          <el-menu-item index="TEST">TEST</el-menu-item>
+                          <el-menu-item index="PLEX">PLEX</el-menu-item>
+                          <el-submenu index="gas">
+                            <template slot="title">Газ</template>
+                            <el-menu-item index="GasProductions">Общая таблица производства</el-menu-item>    
+                            <el-menu-item index="GasAzureMykoserocin">Azure Mykoserocin</el-menu-item>    
+                            <el-menu-item index="GasCeladonMykoserocin">Celadon Mykoserocin</el-menu-item>    
+                            <el-menu-item index="GasGoldenMykoserocin">Golden Mykoserocin</el-menu-item>
+                            <el-menu-item index="GasMalachiteMykoserocin">Malachite Mykoserocin</el-menu-item>    
+                          </el-submenu>
+                          <el-submenu index="buyorder">
+                            <template slot="title">Закупки</template>
+                            <el-submenu index="production">
+                                <template slot="title">Минералы</template>
+                                <el-menu-item index="BuyMineralsTradeHub">Торговые хабы</el-menu-item>
+                            </el-submenu>
+                          </el-submenu>
+                          <el-submenu index="events">
+                            <template slot="title">Исследования</template>
+                            <el-submenu index="T2moduls">
+                                <template slot="title">Т2 модули</template>
+                                <el-menu-item index="MultispectrumShieldHardenerII">Multispectrum Shield Hardener II</el-menu-item>
+                            </el-submenu>
+                          </el-submenu>
+                          <el-submenu index="pricediff">
+                            <template slot="title">Сравнение цен</template>
+                              <el-menu-item index="PriceJitaVSNennamaila">Jita-Nennamaila</el-menu-item>
+                              <el-menu-item index="PriceJitaVSTurnur">Jita-Turnur</el-menu-item>
+                          </el-submenu>
+                          <el-submenu index="lpstore">
+                            <template slot="title">LP Store</template>
+                            <el-menu-item index="LP24ImperialCrusade">24th Imperial Crusade</el-menu-item>
+                            <el-menu-item index="LPFederalDefenceUnion">Federal DefenceUnion</el-menu-item>
+                            <el-menu-item index="LPStateProtectorate">State Protectorate</el-menu-item>
+                            <el-menu-item index="LPTribalLiberationForce">Tribal Liberation Force</el-menu-item>
+                            <el-menu-item index="LPGurista">Gurista</el-menu-item>
+                            <el-menu-item index="LPSistersOfEVE">Sisters of EVE</el-menu-item>
+                            <el-menu-item index="LPCapBooster">Cap Booster</el-menu-item>
+                          </el-submenu>
+                          <el-submenu index="production">
+                            <template slot="title">Производство</template>
+                            <el-submenu index="production1">
+                                <template slot="title">Структуры</template>
+                                <el-menu-item index="MobileDepot">Mobile Depot</el-menu-item>
+                                <el-menu-item index="MobileTractorUnit">Mobile Tractor Unit</el-menu-item>
+                            </el-submenu>
+                            <el-submenu index="production2">
+                                <template slot="title">Импланты</template>
+                                <el-submenu index="production21">
+                                    <template slot="title">Rapture</template>
+                                    <el-menu-item index="ImplantLowRaptureAlpha">Low-grade Rapture Alpha</el-menu-item>
+                                    <el-menu-item index="ImplantLowRaptureDelta">Low-grade Rapture Delta</el-menu-item>    
+                                    <el-menu-item index="ImplantLowRaptureGamma">Low-grade Rapture Gamma</el-menu-item>    
+                                    <el-menu-item index="ImplantMidRaptureBeta">Mid-grade Rapture Beta</el-menu-item>    
+                                    <el-menu-item index="ImplantMidRaptureGamma">Mid-grade Rapture Gamma</el-menu-item>    
+                                </el-submenu>
+                                <el-submenu index="production22">
+                                    <template slot="title">Nirvana</template>
+                                    <el-menu-item index="ImplantMidNirvanaBeta">Mid-grade Nirvana Beta</el-menu-item>
+                                    <el-menu-item index="ImplantMidNirvanaGamma">Mid-grade Nirvana Gamma</el-menu-item>    
+                                </el-submenu>
+                            </el-submenu>
+                            <el-submenu index="production3">
+                                <template slot="title">Компоненты</template>
+                                <el-menu-item index="Components4Ship">Для постройки кораблей</el-menu-item>
+                            </el-submenu>
+                            <el-submenu index="production4">
+                                <template slot="title">Риги</template>
+                                <el-menu-item index="Rigs">Риги</el-menu-item>
+                                <el-menu-item index="T2Rig">Риги T2</el-menu-item>
+                            </el-submenu>
+                            <el-submenu index="production5">
+                                <template slot="title">Модули</template>
+                                <el-menu-item index="T2Shield">Т2 Shield & Repair</el-menu-item>
+                                <el-menu-item index="T2Triglav">Т2 Triglav</el-menu-item>
+                            </el-submenu>
+                            <el-submenu index="production6">
+                                <template slot="title">Корабли</template>
+                                <el-menu-item index="FractionShip">Фракционные</el-menu-item>
+                            </el-submenu>
+                          </el-submenu>
+                      </el-menu>
+                    </el-col>
+                  </el-row>
+            </div>
+            <component v-bind:is="rightcomponentname"></component>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    actualrightcomponentname: 'page-T2Shield',
+                    styleApp: {
+                        display: 'flex'
+                    },
+
+                    getPLEX: function() {
+                        app.$data.actualrightcomponentname = 'page-price-plex';
+                    },
+
+                    getRigs: function() {
+                        app.$data.actualrightcomponentname = 'page-rigs';
+                    },
+
+                    getGoldenMykoserocin: function() {
+                        app.$data.actualrightcomponentname = 'page-golden-mykoserocin';
+                    },
+
+                    getMalachiteMykoserocin: function() {
+                        app.$data.actualrightcomponentname = 'page-malachite-mykoserocin';
+                    },          
+
+                    getAzureMykoserocin: function() {
+                        app.$data.actualrightcomponentname = 'page-azure-mykoserocin';
+                    },          
+
+                    getCeladonMykoserocin: function() {
+                        app.$data.actualrightcomponentname = 'page-celadon-mykoserocin';
+                    },          
+
+                    getLowgradeRaptureAlpha: function() {
+                        app.$data.actualrightcomponentname = 'page-lowgrade-rapture-alpha';
+                    },          
+
+                    getLowgradeRaptureDelta: function() {
+                        app.$data.actualrightcomponentname = 'page-lowgrade-rapture-delta';
+                    },          
+
+                    getLowgradeRaptureGamma: function() {
+                        app.$data.actualrightcomponentname = 'page-lowgrade-rapture-gamma';
+                    },          
+
+                    getMidgradeNirvanaBeta: function() {
+                        app.$data.actualrightcomponentname = 'page-midgrade-nirvana-beta';
+                    },     
+                    
+                    getComponents4Ship: function() {
+                        app.$data.actualrightcomponentname = 'page-components4ship';
+                    },     
+
+                    getMidgradeNirvanaGamma: function() {
+                        app.$data.actualrightcomponentname = 'page-midgrade-nirvana-gamma';
+                    },          
+
+                    getMidgradeRaptureBeta: function() {
+                        app.$data.actualrightcomponentname = 'page-midgrade-rapture-beta';
+                    },          
+
+                    getMidgradeRaptureGamma: function() {
+                        app.$data.actualrightcomponentname = 'page-midgrade-rapture-gamma';
+                    },          
+
+                    getMobileDepot: function() {
+                        app.$data.actualrightcomponentname = 'page-mobile-depot';
+                    },          
+
+                    getMobileTractorUnit: function() {
+                        app.$data.actualrightcomponentname = 'page-mobile-tractor-unit';
+                    },          
+
+                    getLPStateProtectorate: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-stateprotectorate';
+                    },          
+
+                    getLPGurista: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-gurista';
+                    },          
+
+                    getLPCapBooster: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-capbooster';
+                    },          
+                    
+                    getLPFederalDefenceUnion: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-federaldefenceunion';
+                    },          
+
+                    getLP24ImperialCrusade: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-24imperialcrusade';
+                    },          
+
+                    getLPSistersOfEVE: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-sistersofeve';
+                    },          
+
+                    getLPTribalLiberationForce: function() {
+                        app.$data.actualrightcomponentname = 'page-lp-triballiberationforce';
+                    },          
+
+                    getBuyMineralsTradeHub: function() {
+                        app.$data.actualrightcomponentname = 'page-buy-minerals-tradehub';
+                    },          
+
+                    getEventMultispectrumShieldHardenerII: function() {
+                        app.$data.actualrightcomponentname = 'page-event-MultispectrumShieldHardenerII';
+                    },          
+
+                    getPriceJitaVSNennamaila: function() {
+                        app.$data.actualrightcomponentname = 'page-price-jita-nennamaila';
+                    },          
+
+                    getPriceJitaVSTurnur: function() {
+                        app.$data.actualrightcomponentname = 'page-price-jita-turnur';
+                    },          
+
+                    getGasProductions: function() {
+                        app.$data.actualrightcomponentname = 'page-gas-productions';
+                    },          
+                    
+                    getT2Shield: function() {
+                        app.$data.actualrightcomponentname = 'page-T2Shield';
+                    },          
+
+                    getT2Triglav: function() {
+                        app.$data.actualrightcomponentname = 'page-T2Triglav';
+                    },          
+
+                    getT2Rig: function() {
+                        console.log("1");
+                        app.$data.actualrightcomponentname = 'page-T2Rig';
+                    },          
+
+                    getTest: function() {
+                        app.$data.actualrightcomponentname = 'page-test';
+                    },          
+                    
+                    getFractionShip: function() {
+                        app.$data.actualrightcomponentname = 'page-FractionShip';
+                    },          
+                    
+                    styleLeftPage: {
+                        width: '300px',
+                    },
+                }, 
+                computed: {
+                    rightcomponentname: function() {
+                        return this.$data.actualrightcomponentname;
+                    }
+                },
+                methods: {
+                    handleSelect(key, keyPath) {
+                        switch (key) {
+                        case 'PLEX':
+                            app.$data.getPLEX();
+                            break;
+                        case 'TEST':
+                            app.$data.getTest();
+                            break;
+                        case 'ImplantLowRaptureAlpha':
+                            app.$data.getLowgradeRaptureAlpha();
+                            break;
+                        case 'Rigs':
+                            app.$data.getRigs();
+                            break;
+                        case 'ImplantLowRaptureDelta':
+                            app.$data.getLowgradeRaptureDelta();
+                            break;
+                        case 'ImplantLowRaptureGamma':
+                            app.$data.getLowgradeRaptureGamma();
+                            break;
+                        case 'ImplantMidRaptureBeta':
+                            app.$data.getMidgradeRaptureBeta();
+                            break;
+                        case 'ImplantMidRaptureGamma':
+                            app.$data.getMidgradeRaptureGamma();
+                            break;
+                        case 'ImplantMidNirvanaBeta':
+                            app.$data.getMidgradeNirvanaBeta();
+                            break;
+                        case 'Components4Ship':
+                            app.$data.getComponents4Ship();
+                            break;
+                        case 'ImplantMidNirvanaGamma':
+                            app.$data.getMidgradeNirvanaGamma();
+                            break;
+                        case 'GasGoldenMykoserocin':
+                            app.$data.getGoldenMykoserocin();
+                            break;
+                        case 'GasMalachiteMykoserocin':
+                            app.$data.getMalachiteMykoserocin();
+                            break;
+                        case 'GasAzureMykoserocin':
+                            app.$data.getAzureMykoserocin();
+                            break;
+                        case 'GasCeladonMykoserocin':
+                            app.$data.getCeladonMykoserocin();
+                            break;
+                        case 'MobileTractorUnit':
+                            app.$data.getMobileTractorUnit();
+                            break;
+                        case 'MobileDepot':
+                            app.$data.getMobileDepot();
+                            break;
+                        case 'BuyMineralsTradeHub':
+                            app.$data.getBuyMineralsTradeHub();
+                            break;
+                        case 'MultispectrumShieldHardenerII':
+                            app.$data.getEventMultispectrumShieldHardenerII();
+                            break;
+                        case 'PriceJitaVSNennamaila':
+                            app.$data.getPriceJitaVSNennamaila();
+                            break;
+                        case 'PriceJitaVSTurnur':
+                            app.$data.getPriceJitaVSTurnur();
+                            break;
+                        case 'LPStateProtectorate':
+                            app.$data.getLPStateProtectorate();
+                            break;
+                        case 'LPTribalLiberationForce':
+                            app.$data.getLPTribalLiberationForce();
+                            break;
+                        case 'LPGurista':
+                            app.$data.getLPGurista();
+                            break;
+                        case 'LPCapBooster':
+                            app.$data.getLPCapBooster();
+                            break;
+                        case 'LPFederalDefenceUnion':
+                            app.$data.getLPFederalDefenceUnion();
+                            break;
+                        case 'LP24ImperialCrusade':
+                            app.$data.getLP24ImperialCrusade();
+                            break;
+                        case 'LPSistersOfEVE':
+                            app.$data.getLPSistersOfEVE();
+                            break;
+                        case 'GasProductions':
+                            app.$data.getGasProductions();
+                            break;
+                        case 'T2Shield':
+                            app.$data.getT2Shield();
+                            break;
+                        case 'T2Triglav':
+                            app.$data.getT2Triglav();
+                            break;
+                        case 'FractionShip':
+                            app.$data.getFractionShip();
+                            break;
+                        case 'T2Rig':
+                        console.log("2");
+                            app.$data.getT2Rig();
+                            break;
+                        default:
+                            app.$data.actualrightcomponentname = 'page-empty';
+                        }
+                    },
+                  }
+            })
+        </script>
+    </body>
+</html>

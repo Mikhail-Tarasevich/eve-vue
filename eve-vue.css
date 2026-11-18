@@ -1,0 +1,44 @@
+.el-submenu__icon-arrow {
+	right: auto;
+}
+
+.el-menu-item {
+	height: auto;
+	line-height: normal;
+}
+
+.el-submenu__title {
+	height: auto;
+	line-height: normal;
+}
+
+.el-submenu .el-menu-item {
+	height: auto;
+	line-height: normal;
+}
+
+.el-menu {
+	border-right: 0;
+}
+
+.el-table .el-table__cell {
+    padding: 1px 0;
+}
+
+p {
+	margin: 2px 0;
+}
+/*
+.el-table th.el-table__cell>.cell {
+	text-align:center;
+}
+
+.el-table td.el-table__cell div {
+	text-align:right;
+}
+
+.el-table--border .el-table__cell:first-child .cell {
+	text-align:left;
+}
+*/
+
