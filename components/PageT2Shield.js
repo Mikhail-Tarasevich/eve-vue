@@ -124,6 +124,11 @@ Vue.component('page-T2Shield', {
         let CrystallineCarbonide = await getPrice("buy",16670);
         let TitaniumCarbide = await getPrice("sell",16671);
         let Superconductors = await getPrice("buy",9838);
+        let TesseractCapacitorUnit = await getPrice("sell", 11554); 
+        let NanoelectricalMicroprocessor = await getPrice("sell", 11539); 
+        let RAMSEnergyTech = await getPrice("sell", 11482); 
+        let RAMSArmorHullTech = await getPrice("sell", 11475);
+        let Robotics = await getPrice("sell", 9848);
         let LinearShieldEmitter = (((Ferrogel * 1000 + SylramicFibers * 7859 + TungstenCarbide * 19210) / 1000) + 2015);  // где 2015 - стоимость постройки Linear Shield Emitter
         let DeflectionShieldEmitter = (((Ferrogel * 1000 + SylramicFibers * 7859 + FerniteCarbide * 19210) / 1000) + 2015);  // где 2015 - стоимость постройки Deflection Shield Emitter
         let PulseShieldEmitter = (((Ferrogel * 1000 + SylramicFibers * 7859 + CrystallineCarbonide * 19210) / 1000) + 2015);  // где 2015 - стоимость постройки Pulse Shield Emitter
@@ -388,6 +393,146 @@ Vue.component('page-T2Shield', {
 
         this.tableJita.push({goods: "Small Shield Extender II", buy: formatNumber(SmallShieldExtenderII.buy),  sell: formatNumber(SmallShieldExtenderII.sell),  cost: formatNumber(SmallShieldExtenderII.cost),  profit: formatNumber(SmallShieldExtenderII.profit), profitSort: SmallShieldExtenderII.profit});
 
+        // Large Cap Battery II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.442; // Процент успеха модернизации в Т2
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Large Cap Battery II используются Datacore - High Energy Physics и Datacore - Quantum Physics
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Large Cap Battery I) берем с рынка по typeID 2020
+        let LargeCapBatteryI = (Tritanium * 411700 + Pyerite * 156100 + Mexallon * 117700 + Zydrine * 400 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 6}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 12}, 
+          {name: "Superconductors", price: Superconductors, count: 6},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 6}, 
+          {name: "Large Cap Battery I", price: LargeCapBatteryI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+
+        let LargeCapBatteryII = {};
+        LargeCapBatteryII.sell = await getPrice("sell", 3504);
+        LargeCapBatteryII.buy = await getPrice("buy", 3504);
+        LargeCapBatteryII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        LargeCapBatteryII.profit = (LargeCapBatteryII.sell - LargeCapBatteryII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Large Cap Battery II", buy: formatNumber(LargeCapBatteryII.buy),  sell: formatNumber(LargeCapBatteryII.sell),  cost: formatNumber(LargeCapBatteryII.cost),  profit: formatNumber(LargeCapBatteryII.profit), profitSort: LargeCapBatteryII.profit});
+        
+        // Medium Cap Battery II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.422; // Процент успеха модернизации в Т2
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Medium Cap Battery II используются Datacore - High Energy Physics и Datacore - Quantum Physics
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Medium Cap Battery I) берем с рынка по typeID 2018
+        let MediumCapBatteryI = (Tritanium * 120500 + Pyerite * 95300 + Mexallon * 44400 + Isogen * 200 + Nocxium * 100 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 5}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 6}, 
+          {name: "Superconductors", price: Superconductors, count: 5},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 5}, 
+          {name: "Medium Cap Battery I", price: MediumCapBatteryI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        
+        let MediumCapBatteryII = {};
+        MediumCapBatteryII.sell = await getPrice("sell", 3496);
+        MediumCapBatteryII.buy = await getPrice("buy", 3496);
+        MediumCapBatteryII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        MediumCapBatteryII.profit = (MediumCapBatteryII.sell - MediumCapBatteryII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Medium Cap Battery II", buy: formatNumber(MediumCapBatteryII.buy),  sell: formatNumber(MediumCapBatteryII.sell),  cost: formatNumber(MediumCapBatteryII.cost),  profit: formatNumber(MediumCapBatteryII.profit), profitSort: MediumCapBatteryII.profit});
+
+        // Small Cap Battery II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.422; // Процент успеха модернизации в Т2
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Small Cap Battery II используются Datacore - High Energy Physics и Datacore - Quantum Physics
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHighEnergyPhysics) + (1 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Small Cap Battery I) берем с рынка по typeID
+        let SmallCapBatteryI = (Tritanium * 61600 + Pyerite * 38500 + Mexallon * 13800 + Isogen * 200 + Nocxium * 200 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 5}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 6}, 
+          {name: "Superconductors", price: Superconductors, count: 5},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 5}, 
+          {name: "Small Cap Battery I", price: SmallCapBatteryI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        
+        let SmallCapBatteryII = {};
+        SmallCapBatteryII.sell = await getPrice("sell", 3488);
+        SmallCapBatteryII.buy = await getPrice("buy", 3488);
+        SmallCapBatteryII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        SmallCapBatteryII.profit = (SmallCapBatteryII.sell - SmallCapBatteryII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Small Cap Battery II", buy: formatNumber(SmallCapBatteryII.buy),  sell: formatNumber(SmallCapBatteryII.sell),  cost: formatNumber(SmallCapBatteryII.cost),  profit: formatNumber(SmallCapBatteryII.profit), profitSort: SmallCapBatteryII.profit});
+        
+        // Small Armor Repairer II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2 (для Small Armor Repairer II)
+        percentT2 = 0.411; // Процент успеха модернизации в Т2
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1 
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2 
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHydromagneticPhysics) + (1 * DatacoreNaniteEngineering)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Small Armor Repairer I) берем с рынка по typeID 523
+        let SmallArmorRepairerI = (Tritanium * 77300 + Pyerite * 26000 + Megacyte * 400 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 1}, 
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 1}, 
+          {name: "R.A.M.- Armor/Hull Tech", price: RAMSArmorHullTech, count: 1}, 
+          {name: "Small Armor Repairer I", price: SmallArmorRepairerI, count: 1}, 
+          {name: "Robotics", price: Robotics, count: 3}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        
+        let SmallArmorRepairerII = {};
+        SmallArmorRepairerII.sell = await getPrice("sell", 1183);
+        SmallArmorRepairerII.buy = await getPrice("buy", 1183);
+        SmallArmorRepairerII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        SmallArmorRepairerII.profit = (SmallArmorRepairerII.sell - SmallArmorRepairerII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Small Armor Repairer II", buy: formatNumber(SmallArmorRepairerII.buy),  sell: formatNumber(SmallArmorRepairerII.sell),  cost: formatNumber(SmallArmorRepairerII.cost),  profit: formatNumber(SmallArmorRepairerII.profit), profitSort: SmallArmorRepairerII.profit});
+        
         // Medium Armor Repairer II
         ////// Т2 ивент
         countT2 = 100; // количество модулей с постройки Т2-чертежа
@@ -400,7 +545,6 @@ Vue.component('page-T2Shield', {
         ////// Т2 производство
         let MediumArmorRepairerI = (Tritanium * 204390 + Pyerite * 95670 + Mexallon * 81540 + Isogen * 100 + Nocxium * 360 + 1068000) / 100;  // где 582700 - стоимость постройки 100шт
         materialsprice = 0;
-        let NanoelectricalMicroprocessor = await getPrice("sell",11539);
         let RAMSArmorHullTech = await getPrice("sell",11475);
         let Robotics = await getPrice("sell",9848);
         materials = [
@@ -454,6 +598,146 @@ Vue.component('page-T2Shield', {
         LargeArmorRepairerII.profit = (LargeArmorRepairerII.sell - LargeArmorRepairerII.cost) * commisionSellLong;
 
         this.tableJita.push({goods: "Large Armor Repairer II", buy: formatNumber(LargeArmorRepairerII.buy),  sell: formatNumber(LargeArmorRepairerII.sell),  cost: formatNumber(LargeArmorRepairerII.cost),  profit: formatNumber(LargeArmorRepairerII.profit), profitSort: LargeArmorRepairerII.profit});
+
+        // Heavy Capacitor Booster II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2 (базовое значение для invention)
+        percentT2 = 0.422; // Базовый процент успеха модернизации в Т2 
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Heavy Capacitor Booster II используются Datacore - High Energy Physics (3 шт.) и Datacore - Quantum Physics (3 шт.)
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (3 * DatacoreHighEnergyPhysics) + (3 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Heavy Capacitor Booster I) берем с рынка по typeID 3576
+        let HeavyCapacitorBoosterI = (Tritanium * 151000 + Pyerite * 50500 + (Mexallon * 44000) + (Isogen * 36400) + (Nocxium * 600) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 6}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 12}, 
+          {name: "Superconductors", price: Superconductors, count: 24},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 6}, 
+          {name: "Heavy Capacitor Booster I", price: HeavyCapacitorBoosterI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Heavy-версии, при необходимости)
+        
+        let HeavyCapacitorBoosterII = {};
+        HeavyCapacitorBoosterII.sell = await getPrice("sell", 3578);
+        HeavyCapacitorBoosterII.buy = await getPrice("buy", 3578);
+        HeavyCapacitorBoosterII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        HeavyCapacitorBoosterII.profit = (HeavyCapacitorBoosterII.sell - HeavyCapacitorBoosterII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Heavy Capacitor Booster II", buy: formatNumber(HeavyCapacitorBoosterII.buy),  sell: formatNumber(HeavyCapacitorBoosterII.sell),  cost: formatNumber(HeavyCapacitorBoosterII.cost),  profit: formatNumber(HeavyCapacitorBoosterII.profit), profitSort: HeavyCapacitorBoosterII.profit});
+
+        // Medium Capacitor Booster II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.422; // Базовый процент успеха модернизации в Т2
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Medium Capacitor Booster II используются Datacore - High Energy Physics и Datacore - Quantum Physics
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Medium Capacitor Booster I) берем с рынка по typeID 577
+        let MediumCapacitorBoosterI = (Tritanium * 21800 + Pyerite * 13400 + (Mexallon * 51300) + (Zydrine * 200) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 3}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 6}, 
+          {name: "Superconductors", price: Superconductors, count: 12},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 5}, 
+          {name: "Medium Capacitor Booster I", price: MediumCapacitorBoosterI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Medium-версии, при необходимости)
+        
+        let MediumCapacitorBoosterII = {};
+        MediumCapacitorBoosterII.sell = await getPrice("sell", 2024);
+        MediumCapacitorBoosterII.buy = await getPrice("buy", 2024);
+        MediumCapacitorBoosterII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        MediumCapacitorBoosterII.profit = (MediumCapacitorBoosterII.sell - MediumCapacitorBoosterII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Medium Capacitor Booster II", buy: formatNumber(MediumCapacitorBoosterII.buy),  sell: formatNumber(MediumCapacitorBoosterII.sell),  cost: formatNumber(MediumCapacitorBoosterII.cost),  profit: formatNumber(MediumCapacitorBoosterII.profit), profitSort: MediumCapacitorBoosterII.profit});
+
+        // Small Capacitor Booster II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.422; // Базовый процент успеха модернизации в Т2 (34%)
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Small Capacitor Booster II используются Datacore - High Energy Physics (1 шт.) и Datacore - Quantum Physics (1 шт.)
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHighEnergyPhysics) + (1 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        // Стоимость T1-модуля (Small Capacitor Booster I) берем с рынка по typeID 3566
+        let SmallCapacitorBoosterI = (Tritanium * 25000 + (Nocxium * 600) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        materials = [
+          {name: "Morphite", price: Morphite, count: 3}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 3}, 
+          {name: "Superconductors", price: Superconductors, count: 6},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 3}, 
+          {name: "Small Capacitor Booster I", price: SmallCapacitorBoosterI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Small-версии, при необходимости)
+        
+        let SmallCapacitorBoosterII = {};
+        SmallCapacitorBoosterII.sell = await getPrice("sell", 3568);
+        SmallCapacitorBoosterII.buy = await getPrice("buy", 3568);
+        SmallCapacitorBoosterII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        SmallCapacitorBoosterII.profit = (SmallCapacitorBoosterII.sell - SmallCapacitorBoosterII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Small Capacitor Booster II", buy: formatNumber(SmallCapacitorBoosterII.buy),  sell: formatNumber(SmallCapacitorBoosterII.sell),  cost: formatNumber(SmallCapacitorBoosterII.cost),  profit: formatNumber(SmallCapacitorBoosterII.profit), profitSort: SmallCapacitorBoosterII.profit});
+
+        // Cap Recharger II
+        ////// Т2 ивент
+        countT2 = 100; // количество модулей с постройки Т2-чертежа (для расчета стоимости BPC на единицу)
+        countT2copy = 10; // Количество копий в одной BPC T2
+        percentT2 = 0.422; // Базовый процент успеха модернизации в Т2 (34%)
+        countT2event = Math.round(countT2 / countT2copy / percentT2); // количество ивентов, необходимых для получение чертежей Т2 для производства countT2
+        workT1Copy = 50; // Стоимость копии BPC Т1
+        workT1toT2 = 1186; // Стоимость ивента Т1 в Т2
+        // Для invention Cap Recharger II используются Datacore - High Energy Physics (2 шт.) и Datacore - Quantum Physics (2 шт.)
+        workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
+        ////// Т2 производство
+        let CapRechargerI = (Tritanium * 68700 + (Pyerite * 28900) + (Mexallon * 37100) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        materialsprice = 0;
+        // Материалы указаны на партию из 10 модулей (под workT2modul)
+        materials = [
+          {name: "Morphite", price: Morphite, count: 3}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 1}, 
+          {name: "Superconductors", price: Superconductors, count: 5},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 1}, 
+          {name: "Cap Recharger I", price: CapRechargerI, count: 1}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+        ];
+        for (var i=0; i<materials.length; i++) {
+          materialsprice = materialsprice + (materials[i].price * materials[i].count);
+        }
+        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Cap Recharger II)
+        
+        let CapRechargerII = {};
+        CapRechargerII.sell = await getPrice("sell", 2032);
+        CapRechargerII.buy = await getPrice("buy", 2032);
+        CapRechargerII.cost = (workBPC_T2 + materialsprice + workT2modul) / 10;
+        CapRechargerII.profit = (CapRechargerII.sell - CapRechargerII.cost) * commisionSellLong;
+
+        this.tableJita.push({goods: "Cap Recharger II", buy: formatNumber(CapRechargerII.buy),  sell: formatNumber(CapRechargerII.sell),  cost: formatNumber(CapRechargerII.cost),  profit: formatNumber(CapRechargerII.profit), profitSort: CapRechargerII.profit});
 
         this.tableJita.sort(function( a, b ) {
           return b.profitSort-a.profitSort;
