@@ -104,14 +104,15 @@ Vue.component('page-T2Shield', {
     }},
 
     created: async function() {
+        let DatacoreHighEnergyPhysics = await getPrice("buy",20411);
         let DatacoreHydromagneticPhysics = await getPrice("buy",20171);
         let DatacoreQuantumPhysics = await getPrice("buy",20414);
         let DatacoreNaniteEngineering = await getPrice("buy",20416);
         let Morphite = await getPrice("sell",11399);
         let HydrogenBatteries = await getPrice("sell",3685,"10000002","60000364");
         let RAMShieldTech = await getPrice("sell",11484);
-        //let Megacyte = await getPrice("sell",40);
-        //let Zydrine = await getPrice("sell",39);
+        let Megacyte = await getPrice("sell",40);
+        let Zydrine = await getPrice("sell",39);
         let Nocxium = await getPrice("sell",38);
         let Isogen = await getPrice("sell",37);
         let Mexallon = await getPrice("sell",36);
@@ -545,8 +546,6 @@ Vue.component('page-T2Shield', {
         ////// Т2 производство
         let MediumArmorRepairerI = (Tritanium * 204390 + Pyerite * 95670 + Mexallon * 81540 + Isogen * 100 + Nocxium * 360 + 1068000) / 100;  // где 582700 - стоимость постройки 100шт
         materialsprice = 0;
-        let RAMSArmorHullTech = await getPrice("sell",11475);
-        let Robotics = await getPrice("sell",9848);
         materials = [
           {name: "Morphite", price: Morphite, count: 48}, 
           {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 29}, 
