@@ -372,7 +372,7 @@ Vue.component('page-T2Shield', {
         workT1toT2 = 324; // Стоимость ивента Т1 в Т2
         workBPC_T2 = ((workT1Copy + workT1toT2 + (3 * DatacoreHydromagneticPhysics) + (3 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
-        let SmallShieldExtenderI = (Tritanium * 82440 + Pyerite * 5760 + Mexallon * 2610 + Nocxium * 360 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let SmallShieldExtenderI = (Tritanium * 82440 + Pyerite * 5760 + Mexallon * 2610 + Nocxium * 360 + 45300) / 100;  // где 45300 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
           {name: "Morphite", price: Morphite, count: 10}, 
@@ -384,7 +384,7 @@ Vue.component('page-T2Shield', {
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 108000;  // стоимость работ постройки 10 модуля
+        workT2modul = 54720;  // стоимость работ постройки 10 модуля
         
         let SmallShieldExtenderII = {};
         SmallShieldExtenderII.sell = await getPrice("sell",380);
@@ -406,7 +406,7 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Large Cap Battery I) берем с рынка по typeID 2020
-        let LargeCapBatteryI = (Tritanium * 411700 + Pyerite * 156100 + Mexallon * 117700 + Zydrine * 400 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let LargeCapBatteryI = (Tritanium * 411660 + Pyerite * 156060 + Mexallon * 117630 + Zydrine * 360 + 590600) / 100;  // где 590600 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
           {name: "Morphite", price: Morphite, count: 6}, 
@@ -419,7 +419,7 @@ Vue.component('page-T2Shield', {
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        workT2modul = 575600;  // стоимость работ постройки 10 модуля 
 
         let LargeCapBatteryII = {};
         LargeCapBatteryII.sell = await getPrice("sell", 3504);
@@ -441,7 +441,7 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Medium Cap Battery I) берем с рынка по typeID 2018
-        let MediumCapBatteryI = (Tritanium * 120500 + Pyerite * 95300 + Mexallon * 44400 + Isogen * 200 + Nocxium * 100 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let MediumCapBatteryI = (Tritanium * 120420 + Pyerite * 95220 + Mexallon * 44370 + Isogen * 180 + Nocxium * 100 + 245300) / 100;  // где 245300 - стоимость постройки 100шт
 
         materialsprice = 0;
         materials = [
@@ -455,7 +455,7 @@ Vue.component('page-T2Shield', {
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        workT2modul = 355000;  // стоимость работ постройки 10 модуля 
         
         let MediumCapBatteryII = {};
         MediumCapBatteryII.sell = await getPrice("sell", 3496);
@@ -477,7 +477,7 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHighEnergyPhysics) + (1 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Small Cap Battery I) берем с рынка по typeID
-        let SmallCapBatteryI = (Tritanium * 61600 + Pyerite * 38500 + Mexallon * 13800 + Isogen * 200 + Nocxium * 200 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let SmallCapBatteryI = (Tritanium * 61560 + Pyerite * 38430 + Mexallon * 13770 + Isogen * 180 + Nocxium * 180 + 97500) / 100;  // где 97500 - стоимость постройки 100шт
 
         materialsprice = 0;
         materials = [
@@ -491,7 +491,7 @@ Vue.component('page-T2Shield', {
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        workT2modul = 190000;  // стоимость работ постройки 10 модуля 
         
         let SmallCapBatteryII = {};
         SmallCapBatteryII.sell = await getPrice("sell", 3488);
@@ -512,7 +512,7 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHydromagneticPhysics) + (1 * DatacoreNaniteEngineering)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Small Armor Repairer I) берем с рынка по typeID 523
-        let SmallArmorRepairerI = (Tritanium * 77300 + Pyerite * 26000 + Megacyte * 400 + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let SmallArmorRepairerI = (Tritanium * 77220 + Pyerite * 25920 + Megacyte * 360 + 75800) / 100;  // где 75800 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
           {name: "Morphite", price: Morphite, count: 1}, 
@@ -524,7 +524,7 @@ Vue.component('page-T2Shield', {
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля 
+        workT2modul = 127400;  // стоимость работ постройки 10 модуля 
         
         let SmallArmorRepairerII = {};
         SmallArmorRepairerII.sell = await getPrice("sell", 1183);
@@ -610,20 +610,20 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (3 * DatacoreHighEnergyPhysics) + (3 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Heavy Capacitor Booster I) берем с рынка по typeID 3576
-        let HeavyCapacitorBoosterI = (Tritanium * 151000 + Pyerite * 50500 + (Mexallon * 44000) + (Isogen * 36400) + (Nocxium * 600) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let HeavyCapacitorBoosterI = (Tritanium * 150930 + Pyerite * 50490 + (Mexallon * 43920) + (Isogen * 36360) + (Nocxium * 540) + 700000) / 100;  // где 700000 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
-          {name: "Morphite", price: Morphite, count: 6}, 
-          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 12}, 
-          {name: "Superconductors", price: Superconductors, count: 24},
-          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 6}, 
-          {name: "Heavy Capacitor Booster I", price: HeavyCapacitorBoosterI, count: 1}, 
-          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+          {name: "Morphite", price: Morphite, count: 58}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 116}, 
+          {name: "Superconductors", price: Superconductors, count: 231},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 58}, 
+          {name: "Heavy Capacitor Booster I", price: HeavyCapacitorBoosterI, count: 10}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 10}
         ];
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Heavy-версии, при необходимости)
+        workT2modul = 627000;  // стоимость работ постройки 10 модуля (уточните для Heavy-версии, при необходимости)
         
         let HeavyCapacitorBoosterII = {};
         HeavyCapacitorBoosterII.sell = await getPrice("sell", 3578);
@@ -645,20 +645,20 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Medium Capacitor Booster I) берем с рынка по typeID 577
-        let MediumCapacitorBoosterI = (Tritanium * 21800 + Pyerite * 13400 + (Mexallon * 51300) + (Zydrine * 200) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let MediumCapacitorBoosterI = (Tritanium * 21780 + Pyerite * 13320 + (Mexallon * 51210) + (Zydrine * 180) + (Megacyte * 180) + 194500) / 100;  // где 194500 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
-          {name: "Morphite", price: Morphite, count: 3}, 
-          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 6}, 
-          {name: "Superconductors", price: Superconductors, count: 12},
-          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 5}, 
-          {name: "Medium Capacitor Booster I", price: MediumCapacitorBoosterI, count: 1}, 
-          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+          {name: "Morphite", price: Morphite, count: 29}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 58}, 
+          {name: "Superconductors", price: Superconductors, count: 116},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 48}, 
+          {name: "Medium Capacitor Booster I", price: MediumCapacitorBoosterI, count: 10}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 10}
         ];
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Medium-версии, при необходимости)
+        workT2modul = 345800;  // стоимость работ постройки 10 модуля (уточните для Medium-версии, при необходимости)
         
         let MediumCapacitorBoosterII = {};
         MediumCapacitorBoosterII.sell = await getPrice("sell", 2024);
@@ -680,20 +680,20 @@ Vue.component('page-T2Shield', {
         workBPC_T2 = ((workT1Copy + workT1toT2 + (1 * DatacoreHighEnergyPhysics) + (1 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
         // Стоимость T1-модуля (Small Capacitor Booster I) берем с рынка по typeID 3566
-        let SmallCapacitorBoosterI = (Tritanium * 25000 + (Nocxium * 600) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let SmallCapacitorBoosterI = (Tritanium * 24930 + (Nocxium * 540) + (Megacyte * 180) + 47000) / 100;  // где 47000 - стоимость постройки 100шт
         materialsprice = 0;
         materials = [
-          {name: "Morphite", price: Morphite, count: 3}, 
-          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 3}, 
-          {name: "Superconductors", price: Superconductors, count: 6},
-          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 3}, 
-          {name: "Small Capacitor Booster I", price: SmallCapacitorBoosterI, count: 1}, 
-          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+          {name: "Morphite", price: Morphite, count: 30}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 30}, 
+          {name: "Superconductors", price: Superconductors, count: 59},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 30}, 
+          {name: "Small Capacitor Booster I", price: SmallCapacitorBoosterI, count: 10}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 10}
         ];
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Small-версии, при необходимости)
+        workT2modul = 197000;  // стоимость работ постройки 10 модуля (уточните для Small-версии, при необходимости)
         
         let SmallCapacitorBoosterII = {};
         SmallCapacitorBoosterII.sell = await getPrice("sell", 3568);
@@ -714,21 +714,21 @@ Vue.component('page-T2Shield', {
         // Для invention Cap Recharger II используются Datacore - High Energy Physics (2 шт.) и Datacore - Quantum Physics (2 шт.)
         workBPC_T2 = ((workT1Copy + workT1toT2 + (2 * DatacoreHighEnergyPhysics) + (2 * DatacoreQuantumPhysics)) * countT2event) / countT2;  // Итоговая Стоимость модернизации BPC в Т2
         ////// Т2 производство
-        let CapRechargerI = (Tritanium * 68700 + (Pyerite * 28900) + (Mexallon * 37100) + (Megacyte * 200) + 54500) / 100;  // где 54500 - стоимость постройки 100шт
+        let CapRechargerI = (Tritanium * 68670 + (Pyerite * 28890) + (Mexallon * 37080) + (Megacyte * 180) + 164500) / 100;  // где 164500 - стоимость постройки 100шт
         materialsprice = 0;
         // Материалы указаны на партию из 10 модулей (под workT2modul)
         materials = [
-          {name: "Morphite", price: Morphite, count: 3}, 
-          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 1}, 
-          {name: "Superconductors", price: Superconductors, count: 5},
-          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 1}, 
-          {name: "Cap Recharger I", price: CapRechargerI, count: 1}, 
-          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 1}
+          {name: "Morphite", price: Morphite, count: 30}, 
+          {name: "Tesseract Capacitor Unit", price: TesseractCapacitorUnit, count: 10}, 
+          {name: "Superconductors", price: Superconductors, count: 49},
+          {name: "Nanoelectrical Microprocessor", price: NanoelectricalMicroprocessor, count: 10}, 
+          {name: "Cap Recharger I", price: CapRechargerI, count: 10}, 
+          {name: "R.A.M.- Energy Tech", price: RAMSEnergyTech, count: 10}
         ];
         for (var i=0; i<materials.length; i++) {
           materialsprice = materialsprice + (materials[i].price * materials[i].count);
         }
-        workT2modul = 692027;  // стоимость работ постройки 10 модуля (уточните для Cap Recharger II)
+        workT2modul = 123600;  // стоимость работ постройки 10 модуля (уточните для Cap Recharger II)
         
         let CapRechargerII = {};
         CapRechargerII.sell = await getPrice("sell", 2032);
