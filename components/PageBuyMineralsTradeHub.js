@@ -9,6 +9,7 @@ Vue.component('page-buy-minerals-tradehub', {
         :data="tableData"
         border
         stripe
+        :cell-style="cellStyle"
         style="width: 100%">
         <el-table-column
           prop="goods"
@@ -18,27 +19,32 @@ Vue.component('page-buy-minerals-tradehub', {
         <el-table-column
           prop="jita"
           label="Jita"
-          width="100">
+          width="100"
+          :formatter="formatCell">
         </el-table-column>
         <el-table-column
           prop="hek"
           label="Hek"
-          width="100">
+          width="100"
+          :formatter="formatCell">
         </el-table-column>
         <el-table-column
           prop="rens"
           label="Rens"
-          width="100">
+          width="100"
+          :formatter="formatCell">
         </el-table-column>
         <el-table-column
           prop="amarr"
           label="Amarr"
-          width="100">
+          width="100"
+          :formatter="formatCell">
         </el-table-column>
         <el-table-column
           prop="dodixie"
           label="Dodixie"
-          width="100">
+          width="100"
+          :formatter="formatCell">
         </el-table-column>
       </el-table>
     </div>
@@ -47,39 +53,74 @@ Vue.component('page-buy-minerals-tradehub', {
     data() {
         return {
             tableData: [],
-    }},
-    
+        }
+    },
+
+    methods: {
+        // Форматируем число для отображения, null показываем как "-"
+        formatCell(row, column, cellValue) {
+            if (cellValue === null || cellValue === undefined) return "-";
+            return formatNumber(cellValue);
+        },
+
+        // Подсветка минимальной цены в строке
+        cellStyle({ row, column }) {
+            const hubProps = ['jita', 'hek', 'rens', 'amarr', 'dodixie'];
+            if (!hubProps.includes(column.property)) return '';
+
+            const values = hubProps
+                .map(p => row[p])
+                .filter(v => v !== null && v !== undefined && !isNaN(v));
+
+            if (values.length === 0) return '';
+
+            const min = Math.min(...values);
+            if (Number(row[column.property]) === min) {
+                return { background: '#c6efce' }; // зелёный фон
+            }
+            return '';
+        }
+    },
+
     created: async function() {
-            for (var mineral in minerals) {
-                let line = await getMinPrice4TradeHub(mineral, minerals[mineral]);
-                this.tableData.push(line);
-              }
-     },
+        for (var mineral in minerals) {
+            let line = await getMinPrice4TradeHub(mineral, minerals[mineral]);
+            this.tableData.push(line);
+        }
+    },
 });
 
 async function getMinPrice4TradeHub(name, id) {
-    prices = new Array();
-    let awaitvalueJ = await getPrice("sell",id); // цена в Jita
+    let prices = [];
+    let awaitvalueJ = await getPrice("sell", id); // цена в Jita
+    let jita = (Number(awaitvalueJ) < Number.MAX_SAFE_INTEGER) ? Number(awaitvalueJ) : null;
 
-    prices = new Array();
-    let awaitvalue = await getPrice("sell",id,"10000032","60011866"); // цена в Dodixie IX - Moon 20 - Federation Navy Assembly Plant
-    if (awaitvalue<Number.MAX_SAFE_INTEGER) {prices.push(awaitvalue)};
-    let awaitvalueD = (prices.length==0) ? "-" : formatNumber(Math.min.apply(null, prices)) // цена в Dodixie
+    prices = [];
+    let awaitvalue = await getPrice("sell", id, "10000032", "60011866"); // Dodixie
+    if (Number(awaitvalue) < Number.MAX_SAFE_INTEGER) { prices.push(Number(awaitvalue)); }
+    let dodixie = (prices.length === 0) ? null : Math.min.apply(null, prices);
 
-    prices = new Array();
-    awaitvalue = await getPrice("sell",id,"10000043","60008494"); // цена в Amarr VIII (Oris) - Emperor Family Academy
-    if (awaitvalue<Number.MAX_SAFE_INTEGER) {prices.push(awaitvalue)};
-    let awaitvalueA = (prices.length==0) ? "-" : formatNumber(Math.min.apply(null, prices)) // цена в Amarr
+    prices = [];
+    awaitvalue = await getPrice("sell", id, "10000043", "60008494"); // Amarr
+    if (Number(awaitvalue) < Number.MAX_SAFE_INTEGER) { prices.push(Number(awaitvalue)); }
+    let amarr = (prices.length === 0) ? null : Math.min.apply(null, prices);
 
-    prices = new Array();
-    awaitvalue = await getPrice("sell",id,"10000030","60004588"); // цена в Rens VI - Moon 8 - Brutor Tribe Treasury
-    if (awaitvalue<Number.MAX_SAFE_INTEGER) {prices.push(awaitvalue)};
-    let awaitvalueR = (prices.length==0) ? "-" : formatNumber(Math.min.apply(null, prices)) // цена в Rens
+    prices = [];
+    awaitvalue = await getPrice("sell", id, "10000030", "60004588"); // Rens
+    if (Number(awaitvalue) < Number.MAX_SAFE_INTEGER) { prices.push(Number(awaitvalue)); }
+    let rens = (prices.length === 0) ? null : Math.min.apply(null, prices);
 
-    prices = new Array();
-    awaitvalue = await getPrice("sell",id,"10000042","60005686"); // цена в Hek VIII - Moon 12 - Boundless Creation Factory
-    if (awaitvalue<Number.MAX_SAFE_INTEGER) {prices.push(awaitvalue)};
-    let awaitvalueH = (prices.length==0) ? "-" : formatNumber(Math.min.apply(null, prices)) // цена в Hek
+    prices = [];
+    awaitvalue = await getPrice("sell", id, "10000042", "60005686"); // Hek
+    if (Number(awaitvalue) < Number.MAX_SAFE_INTEGER) { prices.push(Number(awaitvalue)); }
+    let hek = (prices.length === 0) ? null : Math.min.apply(null, prices);
 
-    return {goods: name, jita: formatNumber(awaitvalueJ), dodixie: awaitvalueD, amarr: awaitvalueA, rens: awaitvalueR, hek: awaitvalueH};
-};
+    return {
+        goods: name,
+        jita: jita,
+        hek: hek,
+        rens: rens,
+        amarr: amarr,
+        dodixie: dodixie
+    };
+}
